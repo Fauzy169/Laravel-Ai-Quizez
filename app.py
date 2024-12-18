@@ -10,7 +10,7 @@ env = environ.Env()
 environ.Env.read_env('.env')
 
 app = Flask(__name__)
-
+# Bahasa Inggris
 def generate_quiz(kategori, jumlah, kesulitan, level):
     # Initialize LangChain LLM with Google Gemini
     gemini = ChatGoogleGenerativeAI(
