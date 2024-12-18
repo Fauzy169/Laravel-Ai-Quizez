@@ -10,7 +10,7 @@ env = environ.Env()
 environ.Env.read_env('.env')
 
 app = Flask(__name__)
-# Bahasa Inggris
+
 def generate_quiz(kategori, jumlah, kesulitan, level):
     # Initialize LangChain LLM with Google Gemini
     gemini = ChatGoogleGenerativeAI(
@@ -19,21 +19,21 @@ def generate_quiz(kategori, jumlah, kesulitan, level):
         temperature=0.1
     )
 
-    # Define prompt and response format
+    # Define prompt and response format in Bahasa Indonesia
     TEMPLATE = """
-    You are an expert MCQ maker, assigned to create questions and answers using multiple choice questions.
-    Create multiple choice questions with {subject} theme intended for {level} students with {tone} difficulty.
-    Ensure that the questions are unique, in text form, and formatted as follows (no JSON formatting):
-    Each question should look like this:
+    Anda adalah seorang pembuat soal ujian yang ahli, tugas Anda adalah membuat soal pilihan ganda dengan tema {subject}.
+    Buatlah soal pilihan ganda untuk siswa dengan tingkat {level} dan kesulitan {tone}.
+    Pastikan soal-soalnya unik, dalam bentuk teks, dan diformat seperti berikut (tanpa JSON atau format lain):
+    Setiap soal harus tampak seperti ini:
 
-    1. Question text
-       A) Option A
-       B) Option B
-       C) Option C
-       D) Option D
-       Correct Answer: Correct option
+    1. Teks soal
+       A) Pilihan A
+       B) Pilihan B
+       C) Pilihan C
+       D) Pilihan D
+       Jawaban Benar: Pilihan yang benar
 
-    Repeat the format for {number} questions.
+    Ulangi format ini sebanyak {number} soal.
     """
     
     quiz_prompt = PromptTemplate(
@@ -63,7 +63,7 @@ def generate_quiz(kategori, jumlah, kesulitan, level):
     return {
         "level": level,
         "number": jumlah,
-        "quiz": f"Quiz Questions:\n{quiz_text}",
+        "quiz": f"Pertanyaan Quiz:\n{quiz_text}",
         "subject": kategori,
         "tone": kesulitan
     }
